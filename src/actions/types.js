@@ -1,2 +1,2 @@
 
-export const INCREMENT = "INCREMENT"
+export const ADD_TO = "ADD_TO"

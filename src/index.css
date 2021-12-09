@@ -5,9 +5,62 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #FEF8EB;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.myNav{
+  background-color: #F97939;
+  height: 50px;
+}
+
+.link{
+  color: #2E3E4D;
+  text-decoration: none;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.link:hover{
+  color: white;
+}
+
+.cartIcon{
+  color: #2E3E4D;
+  text-decoration: none;
+}
+
+.cartIcon:hover{
+  color: white;
+}
+
+.toppings{
+  max-height: 82vh;
+  overflow-y: scroll;
+  margin: 15px 0px 15px 0px;
+  padding-left: 20px;
+  background-color: #F9B562;
+}
+
+.mainContainer{
+  width: 95vw;
+}
+
+.cartContainer{
+  background-color: #FAD275;
+  height: 90vh;
+  overflow: hidden;
+}
+
+.cart{
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.pizzaHeight{
+  height: 150px;
 }

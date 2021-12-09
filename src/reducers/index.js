@@ -1,11 +1,12 @@
 
 import { combineReducers } from "redux"
-import sampleReducer from "./sampleReducer"
+import cartReducer from "./cartReducer"
+import builderReducer from "./builderReducer"
 
 // EX: access sampleReducer count by using "state.sampleCR.count"
 const rootReducer = combineReducers({
-    sampleCR: sampleReducer
-    // add additional reducer key-value pairs
+    builderCR: builderReducer,
+    cartCR: cartReducer
 })
 
 export default rootReducer
