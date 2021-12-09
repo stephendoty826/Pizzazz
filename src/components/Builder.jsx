@@ -246,6 +246,7 @@ function Builder() {
                   <div className="pizzaHeight my-4">
                     <Pizza key={index} pizza={item} height={"150px"}/>
                   </div>
+                  
                 )
               })}
             </div>
