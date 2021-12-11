@@ -2,21 +2,28 @@
 import React, { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux'
-import { addTo } from '../actions/cartActions';
+import { addTo, deletePizza, changeCount } from '../actions/cartActions';
 import Form from 'react-bootstrap/Form';
 import { toppings } from "../assets/data"
 import { formatCurrancy } from "../components/utils"
 import Pizza from './Pizza';
+import { BsFillTrashFill } from "react-icons/bs"
+import { v4 as uuidv4 } from 'uuid';
+import Fade from "react-reveal/Fade"
 
 function Builder() {
 
   const dispatch = useDispatch()
   const cartItems = useSelector(state => state.cartCR.cartItems)
+  const numberOfItems = useSelector(state => state.cartCR.numberOfItems)
   const state = useSelector(state => state.cartCR)
+
+  // state for pizza count
+  const [count, setCount] = useState(0)
 
   // state for building pizza
   const [pizza, setPizza] = useState({
-    //todo add id
+    id: uuidv4(),
     toppings: [],
     toppingPrices: [],
     toppingImages: [],
@@ -129,6 +136,7 @@ function Builder() {
 
     console.log("resetting pizza");
     setPizza({
+      id: uuidv4(),
       toppings: [],
       toppingPrices: [],
       toppingImages: [],
@@ -177,6 +185,7 @@ function Builder() {
     })
 
     setPizza({
+      ...pizza,
       toppings: tempToppings,
       toppingPrices: tempToppingPrices,
       toppingImages: tempToppingImages, 
@@ -187,69 +196,116 @@ function Builder() {
 
   return (
     <>
-      <div className="container-fluid mainContainer">
+      <div className="container-fluid mainContainer mt-5">
         <div className="row">
           
-          <div className="col-3 bg-info pb-3">
-            <Form onSubmit={addToCart}>
-                <div className="toppings">
-                  {/* loop to render topping choices */}
-                  {toppingsArr.map((key, index)=>{
+          <Fade left duration={850}>
+            <div className="col-3 bg-info pb-3 ms-5 toppingsContainer">
+              <Form onSubmit={addToCart}>
+                  <div className="toppingsSubContainer">
+                    {/* loop to render topping choices */}
+                    {toppingsArr.map((key, index)=>{
+                      return (
+                        <div key={toppings[key].id} className="d-flex toppings align-items-center">
+                          <img className="me-4" src={toppings[key].image} width="100px" height="auto" alt="" />
+                          <Form.Check type="checkbox" label={toppings[key].name} checked={toppingStateArr[index].state} onChange={()=>addTopping(toppingStateArr[index].state, toppingStateArr[index].setState)} />
+                          <span>&nbsp;{formatCurrancy(toppings[key].price)}</span>
+                        </div>
+                      )
+                    })}
+                  </div>
+                <div className="d-flex justify-content-between">
+                  <Button variant="secondary" onClick={resetToppings}>
+                    Reset Toppings
+                  </Button>
+                  <Button variant="primary" type="submit">
+                    Add to Order
+                  </Button>
+                </div>
+              </Form>
+            </div>
+          </Fade>
+
+          {/* Rendering pizza and toppings */}
+          <Fade top duration={1200}>
+            <div className="col-4">
+              <Pizza  pizza={pizza} height={"575px"}/>
+            </div>
+          </Fade>
+
+
+          {/* Rendering price and topping names */}
+          <Fade top duration={1400}>
+            <div className="col-2">
+            <h1>Price: {formatCurrancy(pizza.price)}</h1>
+              {pizza.toppings.length === 0
+              ?
+              <h2>No Toppings</h2>
+              :
+              <>
+                <h2>Toppings</h2>
+                <ul>
+                  {pizza.toppings.map((topping, index)=>{
                     return (
-                      <div key={toppings[key].id} className="d-flex my-5">
-                        <img className="me-5" src={toppings[key].image} width="100px" height="auto" alt="" />
-                        <Form.Check type="checkbox" label={toppings[key].name} checked={toppingStateArr[index].state} onChange={()=>addTopping(toppingStateArr[index].state, toppingStateArr[index].setState)} />
-                        <span>&nbsp; {formatCurrancy(toppings[key].price)}</span>
+                      <h5 key={index}><li>{topping} ({formatCurrancy(pizza.toppingPrices[index])})</li></h5>
+                    )
+                  })}
+                </ul>
+              </>
+              }
+            </div>
+          </Fade>
+
+
+          {/* Rendering Order Items */}
+          <Fade right>
+            <div className="ms-5 col-2 cartContainer">
+              {numberOfItems === 0
+              ?
+              <h1 className="text-center py-3" >Order is empty</h1>
+              :
+                numberOfItems === 1
+                ?
+                <div>
+                  <h2 className="text-center mt-1">{numberOfItems} pizza in Order</h2>
+                  <h3 className="text-center">Total Price: {formatCurrancy(state.totalPrice)}</h3>
+                </div>
+                :
+                <div>
+                  <h2 className="text-center mt-1">{numberOfItems} pizzas in Order</h2>
+                  <h3 className="text-center">Total Price: {formatCurrancy(state.totalPrice)}</h3>
+                </div>
+              }
+                <div className="position-relative cart">
+                  {cartItems.map((item, index)=>{
+                    {/* // component showing pizzas in cart */}
+                    return(
+                      <Fade>
+                      <div key={item.id, index} className="sideCartPizza my-4 ps-1">
+                        <Pizza pizza={item} height={"150px"}/>
+                        <div className="cartButton">
+                          <BsFillTrashFill className="text-danger trashSideCart" onClick={()=>dispatch(deletePizza(item))}/>
+                          <br />
+                          <br />
+                          <span className="h4">x{item.count}</span>
+                          <select className="ms-3" defaultValue={count} onChange={(e)=>setCount(parseInt(e.target.value))}>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                          <button className="btn btn-outline-primary mt-2" onClick={()=>{dispatch(changeCount(item, count)); setCount(1)}}>Update</button>
+                        </div>
                       </div>
+                    </Fade>
                     )
                   })}
                 </div>
-              <div className="d-flex justify-content-between">
-                <Button variant="secondary" onClick={resetToppings}>
-                  Reset Toppings
-                </Button>
-                <Button variant="primary" type="submit">
-                  Add to Order
-                </Button>
-              </div>
-            </Form>
-          </div>
-
-          {/* component showing pizza being built */}
-          <div className="col-4">
-            <Pizza  pizza={pizza} height={"575px"}/>
-          </div>
-
-          <div className="col-2">
-          <h1>Price: {formatCurrancy(pizza.price)}</h1>
-            <h2>Toppings</h2>
-            <ul>
-              {pizza.toppings.map((topping, index)=>{
-                return (
-                  <h5 key={index}><li>{topping} ({formatCurrancy(pizza.toppingPrices[index])})</li></h5>
-                )
-              })}
-            </ul>
-          </div>
-
-          <div className="ms-5 col-2 cartContainer">
-            {cartItems.length === 0
-            ?
-            <h1 className="text-center">Cart is empty</h1>
-            :
-            <h1 className="text-center">{cartItems.length} pizzas in Cart</h1>
-            }
-            <div className="position-relative cart pb-5">
-              {cartItems.map((item, index)=>{
-                return(
-                  // component showing pizzas in cart
-                  <div className="pizzaHeight my-4">
-                    <Pizza key={index} pizza={item} height={"150px"}/>
-                  </div>
-                )
-              })}
             </div>
-          </div>
+          </Fade>
+
+
 
         </div>
       </div>

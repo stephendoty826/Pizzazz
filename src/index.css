@@ -16,6 +16,10 @@ code {
 .myNav{
   background-color: #F97939;
   height: 50px;
+  width: 100vw;
+  position: fixed;
+  z-index: 50;
+  box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.5);
 }
 
 .link{
@@ -38,12 +42,22 @@ code {
   color: white;
 }
 
-.toppings{
+.toppingsContainer{
+  box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.5);
+  border-radius: 25px;
+}
+
+.toppingsSubContainer{
   max-height: 82vh;
   overflow-y: scroll;
   margin: 15px 0px 15px 0px;
   padding-left: 20px;
   background-color: #F9B562;
+  border-radius: 15px;
+}
+
+.toppings{
+  height: 120px;
 }
 
 .mainContainer{
@@ -51,16 +65,79 @@ code {
 }
 
 .cartContainer{
-  background-color: #FAD275;
+  background-color: #6DC5AB;
   height: 90vh;
   overflow: hidden;
+  box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.5);
+  border-radius: 25px;
 }
 
 .cart{
-  height: 100%;
+  height: 88%;
   overflow-y: scroll;
+  background-color: #FBD989;
+  padding-bottom: 25px;
+  border-radius: 15px;
 }
 
-.pizzaHeight{
+.sideCartPizza{
   height: 150px;
+  /* border: 3px solid #FDECC4; */
+}
+
+.cartButton{
+  margin-left: 153px;
+}
+
+.trashSideCart{
+  font-size: 20px;
+  margin-left: 95px;
+}
+
+.trashSideCart:hover{
+  cursor: pointer;
+}
+
+
+
+/* CART CSS */
+
+.cartPizza{
+  height: 350px;
+  padding-top: 25px;
+  background-color:#FBD989;
+  box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.5);
+  border-radius: 25px;
+}
+
+.trashCart{
+  font-size: 35px;
+  /* margin-left: 95px; */
+}
+
+.trashCart:hover{
+  cursor: pointer;
+}
+
+.totals{
+  height: 80vh;
+  width: 18vw;
+  left: 1275px;
+  background-color: #FAD275;
+  box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.5);
+  border: 10px solid #8CA5BA;
+  border-radius: 25px;
+}
+
+
+
+/* CSS for fanFavs page */
+
+.cartContainerFavs{
+  background-color: #6DC5AB;
+  height: 90vh;
+  left: 1275px;
+  overflow: hidden;
+  box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.5);
+  border-radius: 25px;
 }

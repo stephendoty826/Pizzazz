@@ -8,6 +8,7 @@ import BaseLayout from "./components/layout/BaseLayout"
 import Builder from './components/Builder'
 import Cart from "./components/Cart"
 import Deals from './components/Deals'
+import FanFavs from './components/FanFavs'
 import reducer from "./reducers"
 
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -61,9 +62,10 @@ ReactDOM.render(
         <BaseLayout>
           <Routes>
             <Route path="/" element={<App />} />
+            <Route path="/deals" element={<Deals />} />
+            <Route path="/fan-favs" element={<FanFavs />} />
             <Route path="/builder" element={<Builder />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/deals" element={<Deals />} />
           </Routes>
         </BaseLayout>
       </Router>
