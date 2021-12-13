@@ -179,6 +179,7 @@ function Builder() {
       else if(!stateObj.state && tempToppings.includes(toppings[toppingsArr[index]].name)){
         let i = tempToppings.indexOf(toppings[toppingsArr[index]].name)
         tempToppings.splice(i, 1)
+        tempToppingPrices.splice(i, 1)
         tempToppingImages.splice(i, 1)
         tempPrice -= toppings[toppingsArr[index]].price
       }
@@ -277,11 +278,11 @@ function Builder() {
                 </div>
               }
                 <div className="position-relative cart">
-                  {cartItems.map((item, index)=>{
+                  {cartItems.map(item=>{
                     {/* // component showing pizzas in cart */}
                     return(
-                      <Fade>
-                      <div key={item.id, index} className="sideCartPizza my-4 ps-1">
+                      <Fade key={item.id} >
+                      <div className="sideCartPizza my-4 ps-1">
                         <Pizza pizza={item} height={"150px"}/>
                         <div className="cartButton">
                           <BsFillTrashFill className="text-danger trashSideCart" onClick={()=>dispatch(deletePizza(item))}/>
@@ -294,6 +295,11 @@ function Builder() {
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
                           </select>
                           <button className="btn btn-outline-primary mt-2" onClick={()=>{dispatch(changeCount(item, count)); setCount(1)}}>Update</button>
                         </div>

@@ -1,12 +1,12 @@
 
-import { ADD_TO, DELETE_PIZZA, CHANGE_COUNT } from "../actions/types"
-import { pepperoni, meatLovers, veggieLovers, hawaiianPizza, byTheBay, sweetNSpicy } from "../assets/fanFavorites"
+import { ADD_TO, DELETE_PIZZA, CHANGE_COUNT, PLACE_ORDER } from "../actions/types"
+import { justCheese, pepperoni, meatLovers, veggieLovers, hawaiianPizza, byTheBay, sweetNSpicy } from "../assets/fanFavorites"
 
 const initalState = {
     cartItems: [],
     numberOfItems: 0,
     totalPrice: parseFloat(0.00),
-    fanFavorites: [pepperoni, meatLovers, veggieLovers, hawaiianPizza, byTheBay, sweetNSpicy],
+    fanFavorites: [justCheese, pepperoni, meatLovers, veggieLovers, hawaiianPizza, byTheBay, sweetNSpicy],
     favorites: [],
     numberOfFavorites: 0
 }
@@ -15,15 +15,27 @@ const cartReducer = (state=initalState, action) => {
 
     switch(action.type){
         case ADD_TO:
-
-            action.pizza.count = 1
+            
             if(action.bin === "cartItems"){
+                let newCartItems = [...state.cartItems]
+                let isFound = false
                 
+                newCartItems.forEach(item => {
+                    if(item.id === action.pizza.id){
+                        item.count++
+                        isFound = true
+                    }
+                })
+
+                if(!isFound){
+                    newCartItems.push({...action.pizza, count: 1})
+                }
+
                 return {
                     ...state,
-                    cartItems: [...state.cartItems, action.pizza],
-                    numberOfItems: state.numberOfItems + action.pizza.count,
-                    totalPrice: state.totalPrice + action.pizza.price
+                    cartItems: newCartItems,
+                    numberOfItems: state.numberOfItems + 1,
+                    totalPrice: state.totalPrice + parseFloat(action.pizza.price)
                 }
             }
         case DELETE_PIZZA:
@@ -53,6 +65,13 @@ const cartReducer = (state=initalState, action) => {
                 cartItems: newCartItems,
                 numberOfItems: newTotalNumber,
                 totalPrice: newPrice
+            }
+        case PLACE_ORDER:
+            return {
+                ...state,
+                cartItems: [],
+                numberOfItems: 0,
+                totalPrice: parseFloat(0.00)
             }
         default:
             return state

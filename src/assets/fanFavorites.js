@@ -1,4 +1,13 @@
 
+export const justCheese = {
+  id: "1d851ffb-8b75-43d9-8a0f-a06146ee7b40",
+  name: "Just Cheese",
+  price: 12,
+  toppingImages: [],
+  toppingPrices: [],
+  toppings: []
+}
+
 export const pepperoni = {
     count: 1,
     id: "38e0d9e3-2daf-4d0f-9e78-be40629663c8",
@@ -64,10 +73,10 @@ export const supreme = {
 }
 
 export const theWorks = {
-  id: "1129c539-c95b-4309-9014-57cc8f8fa575",
-  name: "Supreme",
-  price: 16.45,
-  toppingImages: (7) ['images/toppings/pepperoni_topping.png', 'images/toppings/ham_topping.png', 'images/toppings/italianSausage_topping.png', 'images/toppings/mushrooms_topping.png', 'images/toppings/olives_topping.png', 'images/toppings/onions_topping.png', 'images/toppings/spinach_topping.png'],
-  toppingPrices: (7) [0.75, 0.75, 0.75, 0.6, 0.6, 0.6, 0.4],
-  toppings: (7) ['Pepperoni', 'Ham', 'Italian Sausage', 'Mushroom', 'Olives', 'Onions', 'Spinach']
+  id: "db709e6a-2c89-4dc1-99c2-193ff2b8c492",
+  name: "The Works",
+  price: 23.40,
+  toppingImages: [],
+  toppingPrices: [0.75, 0.75, 1, 0.75, 1.75, 1.25, 0.75, 0.5, 0.6, 0.6, 0.6, 0.6, 0.6, 0.5, 0.4],
+  toppings: ["Pepperoni", "Ham", "Bacon", "Italian Sausage",   "Anchovies", "Shrimp", "Feta", "Parmesan", "Jalapeños", "Mushroom", "Olives", "Onions", "Pineapple", "Basil", "Spinach"]
 }

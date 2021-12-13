@@ -9,12 +9,12 @@ import { BsFillTrashFill } from "react-icons/bs"
 function FanFavs() {
 
   const numberOfItems = useSelector(state => state.cartCR.numberOfItems)
-  const state = useSelector(state => state.cartCR.state)
+  const state = useSelector(state => state.cartCR)
   const cartItems = useSelector(state => state.cartCR.cartItems)
   const fanFavorites = useSelector(state => state.cartCR.fanFavorites)
 
-    // state for pizza count
-    const [count, setCount] = useState(0)
+  // state for pizza count
+  const [count, setCount] = useState(0)
 
   const dispatch = useDispatch()
 

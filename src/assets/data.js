@@ -111,7 +111,7 @@ export const toppings = {
     name: "Spinach",
     image: "images/toppings/spinach.png",
     toppingImage: "images/toppings/spinach_topping.png",
-    price: 0.4
+    price: 0.4 
   }
 }
 

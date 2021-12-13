@@ -1,5 +1,5 @@
 
-import { ADD_TO, CHANGE_COUNT, DELETE_PIZZA } from "./types"
+import { ADD_TO, CHANGE_COUNT, DELETE_PIZZA, PLACE_ORDER } from "./types"
 
 export const addTo = (pizza, bin) => {
     return {
@@ -21,5 +21,11 @@ export const changeCount = (pizza, count) => {
         type: CHANGE_COUNT,
         pizza,
         count
+    }
+}
+
+export const placeOrder = () => {
+    return {
+        type: PLACE_ORDER
     }
 }
