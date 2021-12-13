@@ -36,7 +36,12 @@ function FanFavs() {
                     <span className="h1 d-block">{item.name}</span>
                     <span className="h3">Price: {formatCurrancy(item.price)}</span>
                   </div>
+                  {item.toppings.length === 0
+                  ?
+                  <span>No toppings</span>
+                  :
                   <span className="h5 fw-bolder">Toppings: </span>
+                  }
                   {/* loop to render topping names */}
                   {item.toppings.map((topping, index)=>{
                     return(
