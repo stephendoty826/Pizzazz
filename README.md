@@ -61,10 +61,78 @@ Allow individuals to build their own pizza with a variety of toppings or choose 
 
 ## Challenges & Solutions:
 
-Challenges: 
-- Tracking global state through out the application
+Challenges:
 - Stacking toppings one on top of the other
 - Implementing quantity options for orders in cart
+- Tracking global state through out the application and through reducer.
+```
+const cartReducer = (state=initalState, action) => {
+
+    switch(action.type){
+        case ADD_TO:
+            
+            if(action.bin === "cartItems"){
+                let newCartItems = [...state.cartItems]
+                let isFound = false
+                
+                newCartItems.forEach(item => {
+                    if(item.id === action.pizza.id){
+                        item.count++
+                        isFound = true
+                    }
+                })
+
+                if(!isFound){
+                    newCartItems.push({...action.pizza, count: 1})
+                }
+
+                return {
+                    ...state,
+                    cartItems: newCartItems,
+                    numberOfItems: state.numberOfItems + 1,
+                    totalPrice: state.totalPrice + parseFloat(action.pizza.price)
+                }
+            }
+        case DELETE_PIZZA:
+            return {
+                ...state,
+                cartItems: state.cartItems.filter(item=>action.pizza.id !== item.id),
+                numberOfItems: state.numberOfItems - action.pizza.count,
+                totalPrice: state.totalPrice - parseFloat(action.pizza.price * action.pizza.count)
+            }
+        case CHANGE_COUNT:
+            action.pizza.count = action.count
+            let newPrice = 0
+            let newTotalNumber = 0
+            let newCartItems = state.cartItems.map(item=>{
+                if(item.id === action.pizza.id){
+                    console.log("inside if-statement")
+                    newPrice += action.pizza.price * action.pizza.count
+                    newTotalNumber += action.pizza.count
+                    return item
+                }
+                newPrice += item.price * item.count
+                newTotalNumber += item.count
+                return item
+            })
+            return {
+                ...state,
+                cartItems: newCartItems,
+                numberOfItems: newTotalNumber,
+                totalPrice: newPrice
+            }
+        case PLACE_ORDER:
+            return {
+                ...state,
+                cartItems: [],
+                numberOfItems: 0,
+                totalPrice: parseFloat(0.00)
+            }
+        default:
+            return state
+    }
+}
+```
 <br>
 
 Solutions:
