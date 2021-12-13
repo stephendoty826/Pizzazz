@@ -25,9 +25,9 @@ function FanFavs() {
         {/* Renders pizzas in fanFavorites array */}
         <Fade left cascade duration={500}>
           <div className="mt-5 col-8">
-          {fanFavorites.map(item=>{
+          {fanFavorites.map((item, index)=>{
             return(
-              <div className="cartPizza row mb-5">
+              <div key={index} className="cartPizza row mb-5">
                 <div className="col-5 ps-4">
                   <Pizza pizza={item} height={"300px"} />
                 </div>
@@ -46,7 +46,7 @@ function FanFavs() {
                   {item.toppings.map((topping, index)=>{
                     return(
                       // terinary to get rid of trailing comma
-                      index === 0 ? <span>{topping}</span> : <span>, {topping}</span>
+                      index === 0 ? <span key={index}>{topping}</span> : <span key={index}>, {topping}</span>
                     )
                   })}
                 </div>
