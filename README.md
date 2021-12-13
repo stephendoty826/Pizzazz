@@ -1,70 +1,168 @@
-# Getting Started with Create React App
+# Pizzazz - Pizza Builder
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview:
+Pizzazz is a pizza building site where a user is able to customize pizzas with a variety of different toppings. A user can also look through some pre-built fan favorite pizzas.  
 
-## Available Scripts
+## Application screenshots:
 
-In the project directory, you can run:
+![Alt text](public/images/screenshots/homepage.png)
+<br/>
 
-### `npm start`
+![Alt text](public/images/registerP.png)
+<br/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![Alt text](public/images/homeP.png)
+<br/>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![Alt text](public/images/UsersP.png)
+<br/>
 
-### `npm test`
+![Alt text](public/images/account_page.png)
+<br/>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Alt text](public/images/feed_dark.png)
+<br/>
 
-### `npm run build`
+![Alt text](public/images/users_dark.png)
+<br/>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![Alt text](public/images/account_dark.png)
+<br/>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Team:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Mercer Mahaffey
+<br>
+Devin Brock
+<br>
+Stephen Doty
+<br>
+James Ivy
+<br>
 
-### `npm run eject`
+## Tools used to build this application:
+[Themeforest](https://themeforest.net/item/sociala-social-network-app-html-template/31502548) was used as a starter template to focus more on the functionality aspects of the website for this project.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+HTML,
+CSS,
+JavaScript, 
+SQL,
+bcryptjs,
+cloudinary,
+cookie-session,
+dotenv,
+ejs,
+formidable,
+passport,
+pg,
+sequelize,
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Basic Objectives:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Allow individuals to create an account to connect with other developers to discuss their coding journey.
+ - Upload photos and make posts about their coding journey. 
+ - Provided free resources to each user to assist with their coding journey
+ - Focus on fucntionality and implment a nice webpage layout.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Flex Goals Completed:
 
-## Learn More
+- Authentication
+- Functionality for register page
+- Create and Delete posts
+- Upload a photo
+- Display date and time of each posts 
+- Allow another user to comment on a antoher users post
+## Stretch Goals Future:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Ability to upload videos
+- Ability to edit posts and comments
+- Ability to follow or add another user as a friend
+- Chatroom functionality
+- Sending messages to specific users
+- Ability to track a users coding journey via Graph
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Challenges & Solutions:
 
-### Code Splitting
+Challenges: 
+- Implementation of cloudinary
+```
+// creating new post
+router.post("/posts", async (req, res, next) => {
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    // creating post with form/cloudinary
+    let userid = req.session.passport.user;
+    
+    // using formidable to grab encrypted data from the form
+    const form = new formidable.IncomingForm();
+    
+    // gives filepath to house temp image file
+    let uploadFolder = path.join(__dirname, "../public", "files")
+    form.uploadDir = uploadFolder
+    form.parse(req, async (err, fields, files) => {
+        if(err){
+            console.log(`An error has occurred inside of form.parse(): ${err}`);
+            next()
+            return
+        }
+        // upload image to cloudinary and create post entry in db
+        if(files.upload.size !== 0){
+            await cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
+                if(err){
+                    console.log(`An error has occurred inside of cloudinary: ${err}`);
+                    return
+                }
+                let languages = '';
+                if(fields.javascript){
+                    languages += "javascript, "
+                }
+                if(fields.html){
+                    languages += "html, "
+                }
+                if(fields.css){
+                    languages += "css, "
+                }
+                if(languages == ''){
+                    languages = ''
+                }
+                languages = languages.substring(0, languages.length-2)
+                await db.posts.create({title: fields.title, content: fields.content, languages, userid: userid, imgurl: result.secure_url})
+                res.redirect("/")
+            })
+            // deletes temp image file in files folder
+            fs.unlinkSync(files.upload.filepath)
+        }
+        else if(fields.content !== ""){
+            let languages = '';
+            if(fields.javascript){
+                languages += "javascript, "
+            }
+            if(fields.html){
+                languages += "html, "
+            }
+            if(fields.css){
+                languages += "css, "
+            }
+            if(languages == ''){
+                languages = ''
+            }
+            languages = languages.substring(0, languages.length-2)
+            await db.posts.create({title: fields.title, content: fields.content, languages: languages, userid: userid, imgurl: ""})
+            fs.unlinkSync(files.upload.filepath)
+            res.redirect("/")
+        }
+        else{
+            fs.unlinkSync(files.upload.filepath)
+            res.redirect("/")
+        }
+    })
+})
+```
+- Working from someone else's HTML/CSS/SCSS template and making it your own
+- Figuring out functionality of code for multiple users
+<br>
 
-### Analyzing the Bundle Size
+Solutions:
+- Reading through documentation and reaching out to outside resources
+- Took the time to filter through their code and made it our own.
+- Taking the time to refactoring the logic for the functionality
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
