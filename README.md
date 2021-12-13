@@ -14,155 +14,61 @@ Pizzazz is a pizza building site where a user is able to customize pizzas with a
 ![Alt text](public/images/screenshots/builder_screenshot.png)
 <br/>
 
-![Alt text](public/images/UsersP.png)
-<br/>
-
-![Alt text](public/images/account_page.png)
-<br/>
-
-![Alt text](public/images/feed_dark.png)
-<br/>
-
-![Alt text](public/images/users_dark.png)
-<br/>
-
-![Alt text](public/images/account_dark.png)
-<br/>
-
 ## Team:
 
-Mercer Mahaffey
-<br>
-Devin Brock
-<br>
 Stephen Doty
-<br>
-James Ivy
 <br>
 
 ## Tools used to build this application:
-[Themeforest](https://themeforest.net/item/sociala-social-network-app-html-template/31502548) was used as a starter template to focus more on the functionality aspects of the website for this project.
 
 HTML,
 CSS,
-JavaScript, 
-SQL,
-bcryptjs,
-cloudinary,
-cookie-session,
-dotenv,
-ejs,
-formidable,
-passport,
-pg,
-sequelize,
+Bootstrap,
+JavaScript,
+React,
+Redux
 
 ## Basic Objectives:
 
-Allow individuals to create an account to connect with other developers to discuss their coding journey.
- - Upload photos and make posts about their coding journey. 
- - Provided free resources to each user to assist with their coding journey
+Allow individuals to build their own pizza with a variety of toppings or choose from a selection of fan favorites.
+ - User can add their pizzas or fan favorites to their order. 
+ - Change quantity of pizzas on the order.
  - Focus on fucntionality and implment a nice webpage layout.
 
 ## Flex Goals Completed:
 
-- Authentication
-- Functionality for register page
-- Create and Delete posts
-- Upload a photo
-- Display date and time of each posts 
-- Allow another user to comment on a antoher users post
+- Visually show pizza being built
+- Track price of pizza as toppings are added
+- Add multiple pizzas to order
+- Show order items on builder page as they are added with delete and quantity buttons
+- Show order items on cart page with delete and quantity buttons along with subtotal, tax, and total
+- Fan favorites page with pre-built pizzas
+
 ## Stretch Goals Future:
 
-- Ability to upload videos
-- Ability to edit posts and comments
-- Ability to follow or add another user as a friend
-- Chatroom functionality
-- Sending messages to specific users
-- Ability to track a users coding journey via Graph
+- Add customer built pizzas to favorites
+- Sort toppings in specific order (meats, seafood, veggies, misc...)
+- Add deals that a user can use on an order
+- Select lite, regular, or extra toppings
+- Different types of crust
+- Different types of cheese
+- Different size pizzas (X-Large, Large, Medium)
+- Coupon codes
+- Drag & drop toppings
+- Be able to edit pizza in the cart
+- Make it a game where you build pizzas for orders comming in. Keep track of profits. Have cost vs price. When orders are late, customer is charged less. Quick orders customer is charged more. 
+
 
 ## Challenges & Solutions:
 
 Challenges: 
-- Implementation of cloudinary
-```
-// creating new post
-router.post("/posts", async (req, res, next) => {
-
-    // creating post with form/cloudinary
-    let userid = req.session.passport.user;
-    
-    // using formidable to grab encrypted data from the form
-    const form = new formidable.IncomingForm();
-    
-    // gives filepath to house temp image file
-    let uploadFolder = path.join(__dirname, "../public", "files")
-    form.uploadDir = uploadFolder
-    form.parse(req, async (err, fields, files) => {
-        if(err){
-            console.log(`An error has occurred inside of form.parse(): ${err}`);
-            next()
-            return
-        }
-        // upload image to cloudinary and create post entry in db
-        if(files.upload.size !== 0){
-            await cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
-                if(err){
-                    console.log(`An error has occurred inside of cloudinary: ${err}`);
-                    return
-                }
-                let languages = '';
-                if(fields.javascript){
-                    languages += "javascript, "
-                }
-                if(fields.html){
-                    languages += "html, "
-                }
-                if(fields.css){
-                    languages += "css, "
-                }
-                if(languages == ''){
-                    languages = ''
-                }
-                languages = languages.substring(0, languages.length-2)
-                await db.posts.create({title: fields.title, content: fields.content, languages, userid: userid, imgurl: result.secure_url})
-                res.redirect("/")
-            })
-            // deletes temp image file in files folder
-            fs.unlinkSync(files.upload.filepath)
-        }
-        else if(fields.content !== ""){
-            let languages = '';
-            if(fields.javascript){
-                languages += "javascript, "
-            }
-            if(fields.html){
-                languages += "html, "
-            }
-            if(fields.css){
-                languages += "css, "
-            }
-            if(languages == ''){
-                languages = ''
-            }
-            languages = languages.substring(0, languages.length-2)
-            await db.posts.create({title: fields.title, content: fields.content, languages: languages, userid: userid, imgurl: ""})
-            fs.unlinkSync(files.upload.filepath)
-            res.redirect("/")
-        }
-        else{
-            fs.unlinkSync(files.upload.filepath)
-            res.redirect("/")
-        }
-    })
-})
-```
-- Working from someone else's HTML/CSS/SCSS template and making it your own
-- Figuring out functionality of code for multiple users
+- Tracking global state through out the application
+- Stacking toppings one on top of the other
+- Implementing quantity options for orders in cart
 <br>
 
 Solutions:
-- Reading through documentation and reaching out to outside resources
-- Took the time to filter through their code and made it our own.
-- Taking the time to refactoring the logic for the functionality
+- Referenced previous projects to review structure of data flow
+- Made use of Photoshop to create PNGs of toppings along with position absolute to stack toppings
+- Referenced previous projects for logic of quantity
 
