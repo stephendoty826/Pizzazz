@@ -8,10 +8,10 @@ Pizzazz is a pizza building site where a user is able to customize pizzas with a
 ![Alt text](public/images/screenshots/homepage_screenshot.png)
 <br/>
 
-![Alt text](public/images/registerP.png)
+![Alt text](public/images/screenshots/fanFavs_screenshot.png)
 <br/>
 
-![Alt text](public/images/homeP.png)
+![Alt text](public/images/screenshots/builder_screenshot.png)
 <br/>
 
 ![Alt text](public/images/UsersP.png)
