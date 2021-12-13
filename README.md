@@ -61,7 +61,9 @@ Allow individuals to build their own pizza with a variety of toppings or choose 
 
 ## Challenges & Solutions:
 
-Challenges: 
+Challenges:
+- Stacking toppings one on top of the other
+- Implementing quantity options for orders in cart
 - Tracking global state through out the application and through reducer.
 ```
 const cartReducer = (state=initalState, action) => {
@@ -131,8 +133,6 @@ const cartReducer = (state=initalState, action) => {
     }
 }
 ```
-- Stacking toppings one on top of the other
-- Implementing quantity options for orders in cart
 <br>
 
 Solutions:
