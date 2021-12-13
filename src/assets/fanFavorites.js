@@ -67,16 +67,16 @@ export const supreme = {
   id: "1129c539-c95b-4309-9014-57cc8f8fa575",
   name: "Supreme",
   price: 16.45,
-  toppingImages: (7) ['images/toppings/pepperoni_topping.png', 'images/toppings/ham_topping.png', 'images/toppings/italianSausage_topping.png', 'images/toppings/mushrooms_topping.png', 'images/toppings/olives_topping.png', 'images/toppings/onions_topping.png', 'images/toppings/spinach_topping.png'],
-  toppingPrices: (7) [0.75, 0.75, 0.75, 0.6, 0.6, 0.6, 0.4],
-  toppings: (7) ['Pepperoni', 'Ham', 'Italian Sausage', 'Mushroom', 'Olives', 'Onions', 'Spinach']
+  toppingImages: ['images/toppings/pepperoni_topping.png', 'images/toppings/ham_topping.png', 'images/toppings/italianSausage_topping.png', 'images/toppings/mushrooms_topping.png', 'images/toppings/olives_topping.png', 'images/toppings/onions_topping.png', 'images/toppings/spinach_topping.png'],
+  toppingPrices: [0.75, 0.75, 0.75, 0.6, 0.6, 0.6, 0.4],
+  toppings: ['Pepperoni', 'Ham', 'Italian Sausage', 'Mushroom', 'Olives', 'Onions', 'Spinach']
 }
 
 export const theWorks = {
   id: "db709e6a-2c89-4dc1-99c2-193ff2b8c492",
   name: "The Works",
   price: 23.40,
-  toppingImages: ["images/toppings/anchovies_topping.png", "images/toppings/bacon_topping.png", "images/toppings/basil_topping.png", "images/toppings/feta_topping.png", "images/toppings/ham_topping.png", "images/toppings/italianSausage_topping.png", "images/toppings/jalapenos_topping.png", "images/toppings/mushrooms_topping.png", "images/toppings/olives_topping.png", "images/toppings/onions_topping.png", "images/toppings/parmesan_topping.png", "images/toppings/pepperoni_topping.png", "images/toppings/pineapple_topping.png", "images/toppings/shrimp_topping.png", "images/toppings/spinach_topping.png"],
+  toppingImages: ["images/toppings/anchovies_topping.png", "images/toppings/bacon_topping.png", "images/toppings/basil_topping.png", "images/toppings/feta_topping.png", "images/toppings/ham_topping.png", "images/toppings/italianSausage_topping.png", "images/toppings/jalapenos_topping.png", "images/toppings/mushrooms_topping.png", "images/toppings/olives_topping.png", "images/toppings/onions_topping.png", "images/toppings/parmesan_topping.png", "images/toppings/pepperoni_topping.png", "images/toppings/pineapple_topping.png", "images/toppings/shrimp_topping.png", "images/toppings/spinach_topping.png"],
   toppingPrices: [0.75, 0.75, 1, 0.75, 1.75, 1.25, 0.75, 0.5, 0.6, 0.6, 0.6, 0.6, 0.6, 0.5, 0.4],
-  toppings: ["Pepperoni", "Ham", "Bacon", "Italian Sausage",   "Anchovies", "Shrimp", "Feta", "Parmesan", "Jalapeños", "Mushroom", "Olives", "Onions", "Pineapple", "Basil", "Spinach"]
+  toppings: ["Pepperoni", "Ham", "Bacon", "Italian Sausage",   "Anchovies", "Shrimp", "Feta", "Parmesan", "Jalapeños", "Mushroom", "Olives", "Onions", "Pineapple", "Basil", "Spinach"]
 }

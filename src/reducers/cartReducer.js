@@ -1,12 +1,12 @@
 
 import { ADD_TO, DELETE_PIZZA, CHANGE_COUNT, PLACE_ORDER } from "../actions/types"
-import { justCheese, pepperoni, meatLovers, veggieLovers, hawaiianPizza, byTheBay, sweetNSpicy, theWorks } from "../assets/fanFavorites"
+import { justCheese, pepperoni, meatLovers, veggieLovers, hawaiianPizza, byTheBay, sweetNSpicy, supreme, theWorks } from "../assets/fanFavorites"
 
 const initalState = {
     cartItems: [],
     numberOfItems: 0,
     totalPrice: parseFloat(0.00),
-    fanFavorites: [justCheese, pepperoni, meatLovers, veggieLovers, hawaiianPizza, byTheBay, sweetNSpicy, theWorks],
+    fanFavorites: [justCheese, pepperoni, meatLovers, veggieLovers, hawaiianPizza, byTheBay, sweetNSpicy, supreme, theWorks],
     favorites: [],
     numberOfFavorites: 0
 }
