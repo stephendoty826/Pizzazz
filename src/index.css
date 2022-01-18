@@ -47,7 +47,8 @@ code {
 /* CSS for home page */
 
 .homeContainer{
-  background-color: #bacddb;
+  /* background-color: #bacddb; */
+  background-color: white;
   height: 91vh;
   box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.5);
   border-radius: 50px;

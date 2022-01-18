@@ -230,7 +230,7 @@ function Builder() {
           {/* Rendering pizza and toppings */}
           <Fade top duration={1200}>
             <div className="col-4">
-              <Pizza  pizza={pizza} height={"575px"}/>
+              <Pizza pizza={pizza} height={"575px"}/>
             </div>
           </Fade>
 
